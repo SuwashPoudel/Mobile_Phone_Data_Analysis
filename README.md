@@ -1,0 +1,1 @@
+This SQL program provides a step-by-step guide to extract meaningful insights from mobile phone datasets using SQL. It is designed for beginners to gain a comprehensive understanding of how SQL syntax works while delving into data analysis.
