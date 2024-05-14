@@ -1,0 +1,177 @@
+
+1. Update all the apple brand phone which price is 89,999 rs and the phone memory is all apple phone is 128GB. 
+We Update in Two Columns First Price and Second in Memory 
+UPDATE ihh_db.mobile_phones
+SET price = '89999', internal_memory= '128' WHERE brand_name = 'apple'; 
+
+2. All “Sony” Phone Brand Update to “Samsung” Phone Brand in all existing row. 
+UPDATE ihh_db.mobile_phones 
+SET brand_name= 'samsung' 
+WHERE brand_name= 'sony' 
+
+3.	Delete the rows in which the cost of the mobile is more than Rs.1,25,000. 
+Step:1 Check first mobile price
+SELECT * FROM ihh_db.mobile_phones 
+WHERE price>125000; 
+Step:2 Delete rows 
+DELETE FROM ihh_db.mobile_phones WHERE price>125000; 
+4. Delete all the nokia mobile phones which battery capacity is grater then 5000 mAH. 
+SELECT * FROM ihh_db.mobile_phones 
+WHERE battery_capacity>5000 and brand_name = 'nokia'; 
+
+
+5.	Delete all the nokia mobile phones which price is grater then 10,000 battery capacity is grater then 5000 mAH. 
+SELECT * FROM ihh_db.mobile_phones
+WHERE battery_capacity>5000 and brand_name = 'nokia' and price>10000; 
+6.	Extract the minimum and maximum mobile phone price in the database. 
+Find Maximum price:
+SELECT MAX(price) FROM ihh_db.mobile_phones; 
+Find Minimum price:
+SELECT MIN(price) FROM ihh_db.mobile_phones; 
+7.	  Extract the minimum internal memory and maximum ram capacity in the all mobile phone database. 
+SELECT MIN(internal_memory), MAX(ram_capacity) FROM ihh_db.mobile_phones; 
+8.	Find the vivo brand mobile phone which price is maximum in the database. SELECT MAX(price) FROM ihh_db.mobile_phones
+WHERE brand_name = 'vivo'; 
+
+9.	Which Phone, How to Extract?
+SELECT * FROM ihh_db.mobile_phones
+WHERE brand_name = 'vivo' AND price = '59999'; 
+
+10.	Find the average rating in the nokia phone. 
+SELECT AVG(rating) FROM ihh_db.mobile_phones WHERE brand_name = 'nokia'; 
+11.	Find the average price in the nokia phone. SELECT AVG(price) FROM ihh_db.mobile_phones WHERE brand_name = 'nokia'; 
+
+
+12.	Find the average price and average rating in the nokia phone. 
+SELECT AVG(price),AVG(rating) FROM ihh_db.mobile_phones WHERE brand_name = 'nokia'; 
+13.	 Sum all mobile phone price in whole database table. 
+     SELECT SUM(price)FROM ihh_db.mobile_phones 
+14. Extract the total price in all one plus mobile phones. SELECT SUM(price)FROM ihh_db.mobile_phones WHERE brand_name = 'oneplus'; 
+15.  Extract the number of “oneplus” mobile phones. SELECT COUNT(*) FROM ihh_db.mobile_phones WHERE brand_name = 'oneplus'; 
+16. Extract the number of “oneplus” and find the total price in “oneplus” brand 
+mobile phones. 
+SELECT COUNT(*), SUM(price) FROM ihh_db.mobile_phones brand_name = 'oneplus'; 
+17. Extract the number of “brand name” in the database of mobile phones. 
+SELECT COUNT(DISTINCT(brand_name)) FROM ihh_db.mobile_phones; 
+18. Extract the number of “brand name” and number of “processor brand” in the database of mobile phones. 
+SELECT COUNT(DISTINCT(brand_name)) ,COUNT(DISTINCT(processor_brand)) FROM ihh_db.mobile_phones; 
+
+19. Find the standard deviation in the “screen size” in mobile database. SELECT STD(screen_size) FROM ihh_db.mobile_phones; 
+
+20. Find the variance in the “screen size” in mobile database. SELECT VARIANCE(screen_size) FROM ihh_db.mobile_phones; 
+
+
+21. Find the variance in the “screen size” in the Samsung mobile phones. SELECT VARIANCE(screen_size) FROM ihh_db.mobile_phones WHERE brand_name = 'samsung'; 
+
+22. Create New Column in Database: Negative_Value
+SELECT price-200000 AS 'negative_value' FROM ihh_db.mobile_phones; 
+23. Use ABS() Function in negative value column
+SELECT ABS(price-200000) AS 'abs_value' FROM ihh_db.mobile_phones; 
+24. Sort “realme” phones by screen size in descending order. 
+SELECT model,screen_size FROM ihh_db.mobile_phones WHERE ; 
+25. Sort  “realme” phones by screen size in descending order. 
+SELECT model,screen_size FROM ihh_db.mobile_phones WHERE brand_name = 'realme'
+Order by screen_size DESC LIMIT 5; 
+26.Sort all the mobile phone models in descending orders with number of total camera. (includes front and back camera = Total Camera) 
+SELECT model, num_rear_cameras + num_front_cameras AS total_camera FROM ihh_db.mobile_phones
+Order by total_camera DESC; 
+27. Sort all the mobile phone with 3rd largest battery. 
+SELECT model, battery_capacity
+FROM ihh_db.mobile_phones
+ORDER BY battery_capacity DESC LIMIT 2,1; 
+28. Sort all the “realme” mobile phone with 3rd, 4th and 5th largest battery. 
+SELECT brand_name, model, battery_capacity FROM ihh_db.mobile_phones
+WHERE brand_name = 'realme'
+ORDER BY battery_capacity DESC LIMIT 2,3; 
+29.Sort all the “realme” mobile phone with 5th smallest battery. 
+SELECT brand_name, model, battery_capacity FROM ihh_db.mobile_phones
+WHERE brand_name = 'realme'
+ORDER BY battery_capacity ASC LIMIT 4,1; 
+30. Sort all the “samsung” mobile phone name which lowest rating. 
+SELECT model, brand_name, rating FROM ihh_db.mobile_phones WHERE brand_name = 'samsung' ORDER BY rating ASC LIMIT 1 ; 
+31. Grouping mobile phones by brand and get count SELECT brand_name, count(*) 
+FROM ihh_db.mobile_phones GROUP BY brand_name; 
+Or (Modification with order BY and LIMIT) 
+32. SELECT brand_name, count(*) as Total_phone FROM ihh_db.mobile_phones
+GROUP BY brand_name
+ORDER BY Total_phone DESC LIMIT 5; 
+33. Grouping mobile phones by brand and . 
+SELECT brand_name, count(*) as Total_phone, 
+Round(AVG(price)) as Avg_Price 
+FROM ihh_db.mobile_phones GROUP BY brand_name
+ORDER BY Total_phone DESC LIMIT 5; 
+
+34. Grouping mobile phones by brand  and get count, average price and maximum rating. 
+ 
+
+SELECT brand_name, count(*) as Total_phone, Round(AVG(price)) as Avg_Price,
+MAX(rating) as Max_Rating
+FROM ihh_db.mobile_phones 
+GROUP BY brand_name
+ORDER BY Total_phone DESC LIMIT 5; 
+35. Grouping mobile phones by brand and get count, average price, maximum and average battery capacity.
+SELECT brand_name, count(*) as Total_phone, Round(AVG(price)) as Avg_Price,
+MAX(rating) as Max_Rating, Round(AVG(battery_capacity)) as Btry_Capacity FROM ihh_db.mobile_phones 
+36. Grouping mobile phones by brand and get count, average price, maximum 
+SELECT brand_name, count(*) as Total_phone, Round(AVG(price)) as Avg_Price,
+MAX(rating) as Max_Rating, Round(AVG(battery_capacity)) as Btry_Capacity, MIN(screen_size) as Min_screen 
+FROM ihh_db.mobile_phones GROUP BY brand_name
+ORDER BY Total_phone DESC LIMIT 5; 
+37. Grouping all mobile phones by 5G and extracting average mobile price and rating. 
+SELECT has_5g,
+AVG(price) AS 'Avg_Price', AVG(rating) AS 'Avg_Rating' FROM ihh_db.mobile_phones GROUP BY has_5g; 
+
+38. Grouping in Multiple Columns: (has_5g, has_ir_blaster) 
+SELECT has_5g, has_ir_blaster, AVG(price) AS 'Avg_Price', AVG(rating) AS 'Avg_Rating' FROM ihh_db.mobile_phones GROUP BY has_5g, has_ir_blaster; 
+39. Grouping all mobile phones by the “mobile brand” and “processor brand” and get the count of models and the average battery capacity. 
+SELECT brand_name,
+processor_brand,
+COUNT(*) AS 'num_of_phones', ROUND(AVG(battery_capacity)) AS 'Avg_Btry_Capacity' FROM ihh_db.mobile_phones
+GROUP BY brand_name,processor_brand ; 
+
+
+
+40. Grouping top 5 most costly phone brands and find the average mobile price in the whole dataset. 
+SELECT brand_name, ROUND(AVG(price)) as 'avg_price' FROM ihh_db.mobile_phones GROUP BY brand_name
+ORDER BY avg_price DESC LIMIT 5 
+41. Group by the brand name who makes the smallest screen smartphones. 
+SELECT brand_name, ROUND(AVG(screen_size)) as 'avg_screen_size' FROM ihh_db.mobile_phones
+GROUP BY brand_name
+ORDER BY avg_screen_size DESC LIMIT 5 
+
+
+
+42. Group mobile phone by the brand, and find the brand with the highest number of models that have both NFC and an IR Blaster. 
+SELECT brand_name, count(*) as 'count'
+FROM ihh_db.mobile_phones
+WHERE has_nfc = 'true' AND has_ir_blaster = 'True' GROUP BY brand_name
+ORDER BY count DESC LIMIT 1 
+
+
+43. Find the average rating of mobile phones brands, which have more than 20 mobile phones. 
+SELECT brand_name, count(*) as 'count', AVG(rating) as 'Avg_rating'
+FROM ihh_db.mobile_phones
+GROUP BY brand_name 
+HAVING count > 20
+ORDER BY Avg_rating DESC ; 
+
+44. Find the “average price” of all the mobile brands according to condition 1 and condition 2. 
+Condition: 1 With average rating of all mobile phones is grater then 70. 
+Condition: 2 Consider number of mobile phones more then 10 with all 5G enables mobile phones. 
+SELECT brand_name,
+AVG(price) as 'Avg_Price'
+FROM ihh_db.mobile_phones
+WHERE has_5g = 'True'
+GROUP BY brand_name
+HAVING AVG(rating) > 70 AND count(*) > 10 ; 
+45. Find the top 5 brands with the highest “average ram” according to condition 1 and condition 2. 
+Condition: 1 That have a refresh rate of at least 60Hz and fast charging available. 
+Condition: 2 Don’t consider brands which have less than 10 phones. 
+SELECT brand_name, 
+AVG(ram_capacity) as 'Avg_Ram' 
+FROM ihh_db.mobile_phones 
+WHERE refresh_rate > 60 AND fast_charging_available = 1 
+GROUP BY brand_name 
+HAVING count(*) > 10 
+ORDER BY 'Avg_Ram' DESC LIMIT 5 ; 
+
